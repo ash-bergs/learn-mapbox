@@ -27,7 +27,6 @@ function PinMapPage({ locations }: any) {
 export default PinMapPage
 
 export async function getStaticProps() {
-  // fetch locations here instead of in the component
   const locations = await fetch(url)
     .then((response) => response.text().then((text) => JSON.parse(text)))
     .then((json) => {
