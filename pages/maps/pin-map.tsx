@@ -4,20 +4,8 @@ import { mapboxAccessToken } from '@/pages/index'
 import Head from  'next/head'
 const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/mexican.json?access_token=${mapboxAccessToken}&bbox=-122.53,37.68,-122.35,37.82&limit=10`;
 
-function PinMapPage() {
-  const [locations, setLocations] = React.useState([])
-
-  React.useEffect(() => {
-    const fetchLocations = async () => {
-      await fetch(url)
-        .then((response) => response.text().then((text) => JSON.parse(text)))
-        .then((json) => {
-          setLocations(json.features)
-        })
-        .catch((error) => console.log(error))
-    }
-    fetchLocations()
-  }, [])
+function PinMapPage({ locations }: any) {
+  
   return (
     <>
       <Head>
@@ -37,3 +25,20 @@ function PinMapPage() {
 }
 
 export default PinMapPage
+
+export async function getStaticProps() {
+  // fetch locations here instead of in the component
+  const locations = await fetch(url)
+    .then((response) => response.text().then((text) => JSON.parse(text)))
+    .then((json) => {
+      return json.features
+    })
+    .catch((error) => console.log(error))
+    
+  return {
+    props: {
+      locations,
+    },
+  };
+}
+
