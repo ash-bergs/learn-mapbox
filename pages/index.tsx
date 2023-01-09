@@ -2,6 +2,8 @@ import * as React from 'react';
 import Head from 'next/head';
 import BasicMap from '../components/BasicMap';
 import BasicStyledMap from '../components/BasicStyledMap';
+import DrawMap from '../components/DrawMap';
+import LayerMap from '../components/LayerMap';
 import MapLoadingIndicator from '../components/MapLoadingIndicator';
 import dynamic from 'next/dynamic';
 const PinMap = dynamic(() => import('../components/PinMap'), {
@@ -41,7 +43,9 @@ export default function Home() {
       */}
       <div className="app-container">
         <div className="map-wrapper">
-          <PinMap locations={locations} />
+          <LayerMap />
+          {/* <PinMap locations={locations} /> */}
+          {/* <DrawMap /> */}
         </div>
         {/* {loading && <MapLoadingIndicator className="loading-holder" />} */}
       </div>
