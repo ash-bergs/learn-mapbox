@@ -8,9 +8,6 @@ function PinMapPage({ locations }: any) {
   
   return (
     <>
-      <Head>
-        <title>Mapbox GL JS with NextJS</title>
-      </Head>
       <div>
         <p>This page visualizes a collection of taco restuarants limited to the West side of San Francisco</p>
         <p>It uses react-map-gl's Marker and Popup component to display restuarant information</p>
