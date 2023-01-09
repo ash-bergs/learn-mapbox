@@ -12,24 +12,12 @@ const PinMap = dynamic(() => import('../components/PinMap'), {
 });
 export const mapboxAccessToken =
   'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
-const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/mexican.json?access_token=${mapboxAccessToken}&bbox=-122.53,37.68,-122.35,37.82&limit=10`;
+
 
 export default function Home({ data }: any) {
   // const [loading, setLoading] = React.useState(true)
   // const handleMapLoading = () => setLoading(false)
-  const [locations, setLocations] = React.useState([]);
 
-  React.useEffect(() => {
-    const fetchLocations = async () => {
-      await fetch(url)
-        .then((response) => response.text().then((text) => JSON.parse(text)))
-        .then((json) => {
-          setLocations(json.features);
-        })
-        .catch((error) => console.log(error));
-    };
-    fetchLocations();
-  }, []);
   return (
     <>
       <Head>
