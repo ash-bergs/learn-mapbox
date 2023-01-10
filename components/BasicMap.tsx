@@ -2,9 +2,7 @@ import * as React from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import the mapbox-gl styles so that the map is displayed correctly
-
-const mapboxAccessToken =
-  'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
+import { mapboxAccessToken } from '@/pages/index'
 
 type MapboxMapProps = {
   initialOptions?: Omit<mapboxgl.MapboxOptions, 'container'>;

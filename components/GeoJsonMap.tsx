@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Map, { Layer, Source, FillLayer } from 'react-map-gl';
-
-const mapboxAccessToken =
-  'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
+import { mapboxAccessToken } from '@/pages/index'
 
   const jsonFillLayer: FillLayer = {
     id: 'json-fill',
@@ -14,7 +12,6 @@ const mapboxAccessToken =
   };
 
 function GeoJsonMap({data}:any) {
-  console.log(data)
   return (
     <Map
       initialViewState={{

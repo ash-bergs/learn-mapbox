@@ -1,7 +1,11 @@
 import * as React from  'react'
-import PinMap from '@/components/PinMap'
+import dynamic from 'next/dynamic';
+const PinMap = dynamic(() => import('@/components/PinMap'), {
+  ssr: false,
+});
+
 import { mapboxAccessToken } from '@/pages/index'
-import Head from  'next/head'
+
 const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/mexican.json?access_token=${mapboxAccessToken}&bbox=-122.53,37.68,-122.35,37.82&limit=10`;
 
 function PinMapPage({ locations }: any) {

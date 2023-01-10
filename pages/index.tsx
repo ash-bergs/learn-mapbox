@@ -1,58 +1,40 @@
 import * as React from 'react';
 import Head from 'next/head';
-import BasicMap from '../components/BasicMap';
-import BasicStyledMap from '../components/BasicStyledMap';
-import GeoJsonMap from '../components/GeoJsonMap';
-import DrawMap from '../components/DrawMap';
-import LayerMap from '../components/LayerMap';
-import MapLoadingIndicator from '../components/MapLoadingIndicator';
-import dynamic from 'next/dynamic';
-const PinMap = dynamic(() => import('../components/PinMap'), {
-  ssr: false,
-});
+import Link from 'next/link';
 export const mapboxAccessToken =
   'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
 
-
 export default function Home({ data }: any) {
-  // const [loading, setLoading] = React.useState(true)
-  // const handleMapLoading = () => setLoading(false)
-
+ 
   return (
     <>
       <Head>
         <title>Mapbox GL JS with NextJS</title>
       </Head>
-      {/* 
-      /**
-      * <BasicMap
-          initialOptions={{ center: [38.0983, 55.7038] }}
-          onMapLoaded={handleMapLoading}
-          />
-      */}
       <div className="app-container">
-        <div className="map-wrapper">
-          <GeoJsonMap data={data} />
-          {/* <LayerMap /> */}
-          {/* <PinMap locations={locations} /> */}
-          {/* <DrawMap /> */}
+        <div
+          className="map-wrapper"
+          style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
+        >
+          <Link href="/maps/geojson-map">GeoJSON Map</Link>
+          <Link href="/maps/pin-map">Pin Map</Link>
+          <Link href="/maps/terrain-map">Terrain Layer Map</Link>
+          <Link href="/maps/mapbox-gl">Pure Mapbox GL</Link>
         </div>
-        {/* {loading && <MapLoadingIndicator className="loading-holder" />} */}
       </div>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const data = await import("@/public/data.json")
-  
+  const data = await import('@/public/data.json');
+
   return {
     props: {
       data: data.default,
     },
   };
 }
-
 
 /**
  * - A function to toggle the visibility of a specific layer on the map
