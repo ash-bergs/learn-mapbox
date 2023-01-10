@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import type { SkyLayer } from 'react-map-gl';
-
-const mapboxAccessToken =
-  'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
+import { mapboxAccessToken } from '@/pages/index'
 
 const skyLayer: SkyLayer = {
   id: 'sky',

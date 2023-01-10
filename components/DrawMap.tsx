@@ -1,9 +1,9 @@
 import * as React from "react";
 import MapGL from "react-map-gl";
 import { Editor, EditingMode, DrawPolygonMode } from "react-map-gl-draw";
+import { mapboxAccessToken } from '@/pages/index'
 
 const MAP_STYLE = "mapbox://styles/mapbox/light-v9";
-const MAPBOX_TOKEN = "pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ";
 
 const initialFeatures = [
   {
