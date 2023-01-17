@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Map from 'react-map-gl'
-import ControlPanel from './ControlPanel';
+import ControlPanel from './ComplexControlPanel';
 import { mapboxAccessToken } from '@/pages/index'
 
 function BasicStyledMap() {
