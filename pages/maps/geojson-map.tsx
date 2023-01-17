@@ -1,4 +1,5 @@
 import * as React from 'react'
+import ControlPanel from '@/components/ControlPanel'
 import GeoJsonMap from '@/components/GeoJsonMap'
 
 function GeoJsonMapPage({ data }: { data: any}) {
@@ -10,6 +11,7 @@ function GeoJsonMapPage({ data }: { data: any}) {
     </div>
     <div style={{ height: '100%', width: '100%'}}>
       <GeoJsonMap data={data} />
+      <ControlPanel />
     </div>
     </>
   )

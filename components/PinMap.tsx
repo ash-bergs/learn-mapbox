@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, NavigationControl , Popup } from 'react-map-gl';
+import { mapboxAccessToken } from '@/pages/index'
 
-const mapboxAccessToken =
-  'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
-
-function PinMap({ locations }) {
+function PinMap({ locations }: any) {
   const [selectedLocation, setSelectedLocation] = useState({});
   const [viewport, setViewport] = useState({
     width: '100%',
@@ -21,7 +19,8 @@ function PinMap({ locations }) {
       {...viewport}
       onMove={(e) => setViewport(e.viewport)}
     >
-      {locations.map((location) => (
+      <NavigationControl />
+      {locations.map((location: any) => (
         <div key={location.id}>
           <Marker
             latitude={location.center[1]}

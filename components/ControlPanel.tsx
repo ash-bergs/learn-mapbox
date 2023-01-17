@@ -1,112 +1,39 @@
-import * as React from 'react';
-import {useState, useEffect} from 'react';
-import {fromJS} from 'immutable';
-import MAP_STYLE from '../styles/map-style-basic-v8.json';
+import * as React from 'react'
+import { useAtom } from 'jotai'
+import { mapAtom } from '@/lib/mapStore'
+// to be linked to a map the control panel needs to share a reference to the map
+// this is done by using the mapStore mapAtom between the two components
 
-const defaultMapStyle: any = fromJS(MAP_STYLE);
-const defaultLayers = defaultMapStyle.get('layers');
+const ControlPanel = () => {
+  const [map] = useAtom(mapAtom)
 
-const categories = ['labels', 'roads', 'buildings', 'parks', 'water', 'background'];
-
-// Layer id patterns by category
-const layerSelector = {
-  background: /background/,
-  water: /water/,
-  parks: /park/,
-  buildings: /building/,
-  roads: /bridge|road|tunnel/,
-  labels: /label|place|poi/
-};
-
-// Layer color class by type
-const colorClass = {
-  line: 'line-color',
-  fill: 'fill-color',
-  background: 'background-color',
-  symbol: 'text-color'
-};
-
-function getMapStyle({visibility, color}: any) {
-  const layers = defaultLayers
-    .filter((layer:any) => {
-      const id = layer.get('id');
-      return categories.every(name => visibility[name] || !layerSelector[name].test(id));
+  const onMoveClick = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const {longitude, latitude} = position.coords
+      map?.setCenter([longitude, latitude])
+      map?.setZoom(12)
     })
-    .map((layer:any) => {
-      const id = layer.get('id');
-      const type = layer.get('type');
-      const category = categories.find(name => layerSelector[name].test(id));
-      if (category && colorClass[type]) {
-        return layer.setIn(['paint', colorClass[type]], color[category]);
-      }
-      return layer;
-    });
-
-  return defaultMapStyle.set('layers', layers);
-}
-
-function StyleControls(props: any) {
-  const [visibility, setVisibility] = useState({
-    water: true,
-    parks: true,
-    buildings: true,
-    roads: true,
-    labels: true,
-    background: true
-  });
-
-  const [color, setColor] = useState({
-    water: '#DBE2E6',
-    parks: '#E6EAE9',
-    buildings: '#c0c0c8',
-    roads: '#ffffff',
-    labels: '#78888a',
-    background: '#EBF0F0'
-  });
-
-  useEffect(() => {
-    props.onChange(getMapStyle({visibility, color}));
-  }, [visibility, color]);
-
-  const onColorChange = (name:any, value:any) => {
-    setColor({...color, [name]: value});
-  };
-
-  const onVisibilityChange = (name:any, value:any) => {
-    setVisibility({...visibility, [name]: value});
-  };
+  }
 
   return (
-    <div className="control-panel">
-      <h3>Dynamic Styling</h3>
-      <p>Dynamically show/hide map layers and change color with Immutable map style.</p>
-      <div className="source-link">
-        <a
-          href="https://github.com/visgl/react-map-gl/tree/7.0-release/examples/layers"
-          target="_new"
-        >
-          View Code ↗
-        </a>
-      </div>
-      <hr />
-      {categories.map(name => (
-        <div key={name} className="input">
-          <label>{name}</label>
-          <input
-            type="checkbox"
-            checked={visibility[name]}
-            onChange={evt => onVisibilityChange(name, evt.target.checked)}
-          />
-          <input
-            type="color"
-            value={color[name]}
-            disabled={!visibility[name]}
-            onChange={evt => onColorChange(name, evt.target.value)}
-          />
-        </div>
-      ))}
+    <div
+    style={{
+      position: "absolute",
+      top: "100px",
+      left: "10px",
+      width: "200px",
+      padding: "8px 16px",
+      boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+      borderRadius: "4px",
+      backgroundColor: "white",
+      display: "flex",
+      flexDirection: "column",
+      rowGap: "6px",
+    }}
+    >
+      <button onClick={onMoveClick}>Find My Location</button>
     </div>
-  );
+  )
 }
 
-export default React.memo(StyleControls);
+export default ControlPanel

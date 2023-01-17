@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import DrawMapSecondary from '@/components/DrawMapSecondary';
 export const mapboxAccessToken =
   'pk.eyJ1IjoiYXNoLWJlcmdzIiwiYSI6ImNsY2pieTEyODZob2YzcHBqYnU2dmtlOHcifQ.56BFVl5cNOQVIUZaELc_DQ';
 
@@ -20,6 +21,7 @@ export default function Home({ data }: any) {
           <Link href="/maps/pin-map">Pin Map</Link>
           <Link href="/maps/terrain-map">Terrain Layer Map</Link>
           <Link href="/maps/mapbox-gl">Pure Mapbox GL</Link>
+          <Link href="/maps/draw-map">Draw Map</Link>
         </div>
       </div>
     </>
